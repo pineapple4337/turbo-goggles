@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenJio — Buy together. Save together.</title>
+  <meta name="description" content="A community group-buying prototype for household essentials.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home">Open<span>Jio</span></a>
+    <nav>
+      <button class="nav-link active" data-view="home">Home</button>
+      <button class="nav-link" data-view="marketplace">Group buys</button>
+      <button class="nav-link" data-view="orders">My orders</button>
+      <button class="nav-link admin-link" data-view="admin">Admin</button>
+      <button class="cart-button" id="cartButton" aria-label="Open cart">🛒 <span id="cartCount">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="view active" id="home">
+      <div class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">COMMUNITY GROUP BUYING</div>
+          <h1>Buy together.<br><em>Save together.</em></h1>
+          <p>Join your neighbours to unlock wholesale prices on everyday household essentials, without having to buy in bulk on your own.</p>
+          <div class="hero-actions">
+            <button class="primary-button" data-go="marketplace">Browse group buys</button>
+            <button class="secondary-button" data-go="how">How it works</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span>COMMUNITY SAVINGS</span>
+            <span class="live-dot">● LIVE</span>
+          </div>
+          <div class="saving-number">31%</div>
+          <p>Potential savings on selected household essentials.</p>
+          <div class="mini-progress"><span style="width:76%"></span></div>
+          <small>76% of this week's group-buy targets reached</small>
+        </div>
+      </div>
+
+      <section class="section">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">THIS WEEK</div>
+            <h2>Active group buys</h2>
+          </div>
+          <button class="text-button" data-go="marketplace">See all →</button>
+        </div>
+        <div class="product-grid" id="featuredProducts"></div>
+      </section>
+
+      <section class="how-section" id="how">
+        <div class="eyebrow">HOW OPENJIO WORKS</div>
+        <h2>Better prices, powered by neighbours.</h2>
+        <div class="steps">
+          <article><span>01</span><h3>Join a group buy</h3><p>Choose what you need. You only buy the quantity that works for your household.</p></article>
+          <article><span>02</span><h3>Reach the target</h3><p>Orders from the community are combined to reach the supplier's bulk quantity.</p></article>
+          <article><span>03</span><h3>Collect nearby</h3><p>Pick up your order from a participating Community Club or community hub.</p></article>
+        </div>
+      </section>
+    </section>
+
+    <section class="view" id="marketplace">
+      <div class="page-header">
+        <div><div class="eyebrow">MARKETPLACE</div><h1>Save more on what you use every day.</h1><p>Every order helps move the community closer to unlocking the group price.</p></div>
+      </div>
+      <div class="filter-row" id="filters"></div>
+      <div class="product-grid marketplace-grid" id="marketplaceProducts"></div>
+    </section>
+
+    <section class="view" id="product">
+      <button class="back-button" data-go="marketplace">← Back to group buys</button>
+      <div id="productDetail"></div>
+    </section>
+
+    <section class="view" id="checkout">
+      <button class="back-button" data-go="marketplace">← Continue shopping</button>
+      <div class="checkout-layout">
+        <div>
+          <div class="eyebrow">CHECKOUT</div>
+          <h1>Your reservation</h1>
+          <div id="checkoutItems" class="checkout-items"></div>
+        </div>
+        <aside class="checkout-card">
+          <h3>Choose a collection point</h3>
+          <div id="hubOptions"></div>
+          <div class="summary" id="checkoutSummary"></div>
+          <button class="primary-button full" id="confirmOrder">Reserve my order</button>
+          <p class="fine-print">This prototype records a reservation only. No payment is taken.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="view" id="confirmation">
+      <div class="confirmation">
+        <div class="success-icon">✓</div>
+        <div class="eyebrow">RESERVATION CONFIRMED</div>
+        <h1>You're in the group.</h1>
+        <p id="confirmationText"></p>
+        <div class="order-code" id="orderCode"></div>
+        <button class="primary-button" data-go="orders">View my orders</button>
+      </div>
+    </section>
+
+    <section class="view" id="orders">
+      <div class="page-header">
+        <div><div class="eyebrow">MY ORDERS</div><h1>Your group-buy reservations.</h1><p>Keep track of upcoming collection dates and order codes.</p></div>
+      </div>
+      <div id="ordersList"></div>
+    </section>
+
+    <section class="view" id="admin">
+      <div class="page-header">
+        <div><div class="eyebrow">OPENJIO TEST DASHBOARD</div><h1>Community hub dashboard.</h1><p>A simple view for tracking prototype orders and collection.</p></div>
+      </div>
+      <div class="admin-stats" id="adminStats"></div>
+      <div class="admin-panel">
+        <div class="admin-panel-heading"><h2>Reservations</h2><button class="secondary-button" id="resetDemo">Reset demo data</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Order</th><th>Collection hub</th><th>Items</th><th>Status</th><th></th></tr></thead>
+          <tbody id="adminOrders"></tbody></table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="drawer-header"><h2>Your basket</h2><button class="icon-button" id="closeCart">×</button></div>
+    <div id="cartItems"></div>
+    <div class="drawer-footer">
+      <div class="summary" id="cartSummary"></div>
+      <button class="primary-button full" id="checkoutButton">Choose collection point</button>
+    </div>
+  </div>
+  <div class="overlay" id="overlay"></div>
+
+  <footer>OpenJio prototype · Buy together. Save together.</footer>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
